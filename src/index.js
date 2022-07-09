@@ -31,6 +31,22 @@ const resolvers = {
                 },
             })
         },
+        update: async (parent, args, context, info) => {
+            const id = parseInt(args.id)
+            await context.prisma.link.update({
+                where: {
+                    id,
+                },
+                data: {
+                    url: args.url,
+                },
+            })
+            return await context.prisma.link.findUnique({
+                where: {
+                    id
+                },
+            })
+        },
         delete: async (parent, args, context, info) => {
             const link = await context.prisma.link.findUnique({
                 where: {
