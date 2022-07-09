@@ -11,9 +11,21 @@ let links = [{
 
 const resolvers = {
     Query: {
-        info: () => `This is the API of a Hackernews Clone`,
         feed: async (parent, args, context) => {
-            return context.prisma.link.findMany()
+            const where = args.filter
+                ? {
+                    OR: [
+                        {description: {contains: args.filter}},
+                        {url: {contains: args.filter}},
+                    ],
+                }
+                : {}
+
+            const links = await context.prisma.link.findMany({
+                where,
+            })
+
+            return links
         },
     },
     Mutation: {
