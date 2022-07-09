@@ -3,12 +3,6 @@ const {PrismaClient} = require('@prisma/client')
 const fs = require('fs');
 const path = require('path');
 
-let links = [{
-    id: 'link-0',
-    url: 'www.howtographql.com',
-    description: 'Fullstack tutorial for GraphQL'
-}]
-
 const resolvers = {
     Query: {
         feed: async (parent, args, context) => {
@@ -29,14 +23,26 @@ const resolvers = {
         },
     },
     Mutation: {
-        post: (parent, args, context, info) => {
-            const newLink = context.prisma.link.create({
+        post: async (parent, args, context, info) => {
+            return await context.prisma.link.create({
                 data: {
                     url: args.url,
                     description: args.description,
                 },
             })
-            return newLink
+        },
+        delete: async (parent, args, context, info) => {
+            const link = await context.prisma.link.findUnique({
+                where: {
+                    id: parseInt(args.id),
+                },
+            })
+            await context.prisma.link.delete({
+                where: {
+                    id: parseInt(args.id),
+                },
+            })
+            return link
         },
     },
     // 3
