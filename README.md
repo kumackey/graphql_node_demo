@@ -1,3 +1,15 @@
+# 環境構築(未検証)
+
+```text
+npm install
+
+npx prisma migrate 
+```
+
+# 参考になったチュートリアル
+
+https://www.howtographql.com/graphql-js/1-getting-started/
+
 # 開発
 
 GraphQLサーバ立ち上げ
