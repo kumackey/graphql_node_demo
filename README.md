@@ -3,7 +3,8 @@
 ```text
 npm install
 
-npx prisma migrate 
+npx prisma migrate dev
+prisma generate
 ```
 
 # 参考になったチュートリアル
@@ -22,6 +23,7 @@ migration
 
 ```text
 npx prisma migrate dev
+prisma generate
 ```
 
 SQliteのクライアント

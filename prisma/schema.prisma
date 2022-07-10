@@ -11,8 +11,20 @@ generator client {
 
 // 3
 model Link {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  modifiedAt  DateTime  @default(now())
   description String
   url         String
+  Comment     Comment[]
+}
+
+// 3
+model Comment {
+  id         Int      @id @default(autoincrement())
+  linkId     Int?
+  createdAt  DateTime @default(now())
+  modifiedAt DateTime @default(now())
+  content    String
+  link       Link?    @relation(fields: [linkId], references: [id])
 }

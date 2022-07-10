@@ -15,11 +15,9 @@ const resolvers = {
                 }
                 : {}
 
-            const links = await context.prisma.link.findMany({
+            return await context.prisma.link.findMany({
                 where,
             })
-
-            return links
         },
     },
     Mutation: {
@@ -66,6 +64,8 @@ const resolvers = {
         id: (parent) => parent.id,
         description: (parent) => parent.description,
         url: (parent) => parent.url,
+        createdAt: (parent) => parent.createdAt.toTimeString(),
+        modifiedAt: (parent) => parent.modifiedAt.toTimeString(),
     }
 }
 
