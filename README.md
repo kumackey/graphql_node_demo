@@ -1,15 +1,15 @@
 # GraphQLとは
 
-[Learn GraphQL Fundamentals with Fullstack Tutorial](https://www.howtographql.com/basics/0-introduction/)
-[GraphQLの基礎 チュートリアル](https://goodeatcompany.notion.site/GraphQL-dc01d9e8ccb64b0b9a66cfd3091deee3)
+- [Learn GraphQL Fundamentals with Fullstack Tutorial](https://www.howtographql.com/basics/0-introduction/)
+- [GraphQLの基礎 チュートリアル](https://goodeatcompany.notion.site/GraphQL-dc01d9e8ccb64b0b9a66cfd3091deee3)
 
-APIのクエリ言語。発想としては「APIをSQLっぽく書ければ便利じゃね？」
+APIのクエリ言語。
 用途はBackend for Frontend。
 
 良いところ
 
 - スキーマ(Schema Definition Language, SDL)による組織間コミュニケーション
-- フロントエンド側で使うフィールドを限定できる。オーバーフェッチが少ない
+- オーバーフェッチが少ない
 - スキーマ駆動開発
 - 単一エンドポイント(複数リクエストを送る必要がなくなったりする)
 
@@ -20,11 +20,7 @@ npm install
 
 npx prisma migrate dev
 prisma generate
-```
-
-# 参考になったチュートリアル
-
-https://www.howtographql.com/graphql-js/1-getting-started/
+``
 
 # 開発
 
@@ -41,7 +37,7 @@ npx prisma migrate dev
 prisma generate
 ```
 
-SQliteのクライアント
+データベースのクライアント
 
 ```text
 npx prisma studio
