@@ -21,7 +21,7 @@ const resolvers = {
         },
     },
     Mutation: {
-        post: async (parent, args, context, info) => {
+        addUser: async (parent, args, context, info) => {
             return await context.prisma.user.create({
                 data: {
                     username: args.username,

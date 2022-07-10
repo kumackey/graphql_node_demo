@@ -49,6 +49,24 @@ query {
 }
 
 mutation {
+  addUser(username: "kumaki", description: "エンジニアです") {
+    id,
+    description,
+    createdAt,
+    modifiedAt
+  }
+}
+
+mutation {
+  addUser(username: "詳細不明さん") {
+    id,
+    description,
+    createdAt,
+    modifiedAt
+  }
+}
+
+mutation {
   changeName(id:2, username: "updated username") {
     id
     username
