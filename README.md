@@ -35,9 +35,25 @@ npx prisma studio
 # サンプルクエリ
 
 ```text
-mutation {
-  post(url: "www.prisma.io", description: "Prisma replaces traditional ORMs") {
+query {
+  users{
     id
+    username
+    description
+    comments {
+      id
+      content
+      createdAt
+    }
+  }
+}
+
+mutation {
+  changeName(id:2, username: "updated username") {
+    id
+    username
+    createdAt
+    modifiedAt
   }
 }
 

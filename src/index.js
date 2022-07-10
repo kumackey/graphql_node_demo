@@ -10,7 +10,7 @@ const resolvers = {
                 ? {
                     OR: [
                         {description: {contains: args.filter}},
-                        {url: {contains: args.filter}},
+                        {username: {contains: args.filter}},
                     ],
                 }
                 : {}
@@ -24,20 +24,20 @@ const resolvers = {
         post: async (parent, args, context, info) => {
             return await context.prisma.user.create({
                 data: {
-                    url: args.url,
+                    username: args.username,
                     description: args.description,
                 },
             })
         },
-        update: async (parent, args, context, info) => {
+        changeName: async (parent, args, context, info) => {
             const id = parseInt(args.id)
             await context.prisma.user.update({
                 where: {
                     id,
                 },
                 data: {
-                    url: args.url,
-                    modifiedAt: args.modifiedAt
+                    username: args.username,
+                    modifiedAt: new Date(Date.now()),
                 },
             })
             return await context.prisma.user.findUnique({
@@ -79,7 +79,7 @@ const resolvers = {
     User: {
         id: (parent) => parent.id,
         description: (parent) => parent.description,
-        url: (parent) => parent.url,
+        username: (parent) => parent.username,
         createdAt: (parent) => parent.createdAt.toTimeString(),
         modifiedAt: (parent) => parent.modifiedAt.toTimeString(),
         comments: async (parent) => {

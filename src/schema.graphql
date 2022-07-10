@@ -3,16 +3,16 @@ type Query {
 }
 
 type Mutation {
-  post(url: String!, description: String!): User!
-  update(id: ID!, url: String!): User!
+  post(username: String!, description: String!): User!
+  changeName(id: ID!, username: String!): User!
   delete(id: ID!): User!
   add_comment(userId: ID!, content: String!): Comment!
 }
 
 type User {
   id: ID!
+  username: String!
   description: String!
-  url: String!
   createdAt: String!
   modifiedAt: String!
   comments: [Comment!]!
