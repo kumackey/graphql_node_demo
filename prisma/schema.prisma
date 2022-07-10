@@ -16,7 +16,7 @@ model Link {
   modifiedAt  DateTime  @default(now())
   description String
   url         String
-  Comment     Comment[]
+  comments     Comment[]
 }
 
 // 3

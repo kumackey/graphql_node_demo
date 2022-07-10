@@ -37,6 +37,7 @@ const resolvers = {
                 },
                 data: {
                     url: args.url,
+                    modifiedAt: args.modifiedAt
                 },
             })
             return await context.prisma.link.findUnique({
@@ -58,12 +59,45 @@ const resolvers = {
             })
             return link
         },
+        add_comment: async (parent, args, context, info) => {
+            console.log(args)
+            const comment = await context.prisma.comment.create({
+                data: {
+                    content: args.content,
+                    link: {
+                        connect: {
+                            id: parseInt(args.linkID),
+                        },
+                    },
+                },
+                include: {
+                    link: true,
+                },
+            })
+            return comment
+        },
     },
-    // 3
     Link: {
         id: (parent) => parent.id,
         description: (parent) => parent.description,
         url: (parent) => parent.url,
+        createdAt: (parent) => parent.createdAt.toTimeString(),
+        modifiedAt: (parent) => parent.modifiedAt.toTimeString(),
+        comments: async (parent) => {
+            const link = await prisma.link.findUnique({
+                where: {
+                    id: parseInt(parent.id),
+                },
+                include: {
+                    comments: true,
+                }
+            })
+            return link.comments
+        },
+    },
+    Comment: {
+        id: (parent) => parent.id,
+        content: (parent) => parent.content,
         createdAt: (parent) => parent.createdAt.toTimeString(),
         modifiedAt: (parent) => parent.modifiedAt.toTimeString(),
     }
