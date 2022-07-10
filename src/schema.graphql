@@ -1,6 +1,5 @@
 type Query {
   users(filter: String): [User!]!
-  user(username: username): User!
 }
 
 type Mutation {
