@@ -48,7 +48,7 @@ mutation {
 }
 
 query {
-  feed{
+  users{
     id
     url
     description

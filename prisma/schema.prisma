@@ -10,7 +10,7 @@ generator client {
 }
 
 // 3
-model Link {
+model User {
   id          Int       @id @default(autoincrement())
   createdAt   DateTime  @default(now())
   modifiedAt  DateTime  @default(now())
@@ -22,9 +22,9 @@ model Link {
 // 3
 model Comment {
   id         Int      @id @default(autoincrement())
-  linkId     Int?
+  userId     Int?
   createdAt  DateTime @default(now())
   modifiedAt DateTime @default(now())
   content    String
-  link       Link?    @relation(fields: [linkId], references: [id])
+  user       User?    @relation(fields: [userId], references: [id])
 }

@@ -1,15 +1,15 @@
 type Query {
-  feed(filter: String): [Link!]!
+  users(filter: String): [User!]!
 }
 
 type Mutation {
-  post(url: String!, description: String!): Link!
-  update(id: ID!, url: String!): Link!
-  delete(id: ID!): Link!
-  add_comment(linkID: ID!, content: String!): Comment!
+  post(url: String!, description: String!): User!
+  update(id: ID!, url: String!): User!
+  delete(id: ID!): User!
+  add_comment(userId: ID!, content: String!): Comment!
 }
 
-type Link {
+type User {
   id: ID!
   description: String!
   url: String!

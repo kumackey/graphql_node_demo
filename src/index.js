@@ -5,7 +5,7 @@ const path = require('path');
 
 const resolvers = {
     Query: {
-        feed: async (parent, args, context) => {
+        users: async (parent, args, context) => {
             const where = args.filter
                 ? {
                     OR: [
@@ -15,14 +15,14 @@ const resolvers = {
                 }
                 : {}
 
-            return await context.prisma.link.findMany({
+            return await context.prisma.user.findMany({
                 where,
             })
         },
     },
     Mutation: {
         post: async (parent, args, context, info) => {
-            return await context.prisma.link.create({
+            return await context.prisma.user.create({
                 data: {
                     url: args.url,
                     description: args.description,
@@ -31,7 +31,7 @@ const resolvers = {
         },
         update: async (parent, args, context, info) => {
             const id = parseInt(args.id)
-            await context.prisma.link.update({
+            await context.prisma.user.update({
                 where: {
                     id,
                 },
@@ -40,51 +40,50 @@ const resolvers = {
                     modifiedAt: args.modifiedAt
                 },
             })
-            return await context.prisma.link.findUnique({
+            return await context.prisma.user.findUnique({
                 where: {
                     id
                 },
             })
         },
         delete: async (parent, args, context, info) => {
-            const link = await context.prisma.link.findUnique({
+            const user = await context.prisma.user.findUnique({
                 where: {
                     id: parseInt(args.id),
                 },
             })
-            await context.prisma.link.delete({
+            await context.prisma.user.delete({
                 where: {
                     id: parseInt(args.id),
                 },
             })
-            return link
+            return user
         },
         add_comment: async (parent, args, context, info) => {
             console.log(args)
-            const comment = await context.prisma.comment.create({
+            return await context.prisma.comment.create({
                 data: {
                     content: args.content,
-                    link: {
+                    user: {
                         connect: {
-                            id: parseInt(args.linkID),
+                            id: parseInt(args.userId),
                         },
                     },
                 },
                 include: {
-                    link: true,
+                    user: true,
                 },
             })
-            return comment
         },
     },
-    Link: {
+    User: {
         id: (parent) => parent.id,
         description: (parent) => parent.description,
         url: (parent) => parent.url,
         createdAt: (parent) => parent.createdAt.toTimeString(),
         modifiedAt: (parent) => parent.modifiedAt.toTimeString(),
         comments: async (parent) => {
-            const link = await prisma.link.findUnique({
+            const user = await prisma.user.findUnique({
                 where: {
                     id: parseInt(parent.id),
                 },
@@ -92,7 +91,7 @@ const resolvers = {
                     comments: true,
                 }
             })
-            return link.comments
+            return user.comments
         },
     },
     Comment: {
