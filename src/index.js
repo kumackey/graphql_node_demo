@@ -46,7 +46,7 @@ const resolvers = {
                 },
             })
         },
-        delete: async (parent, args, context, info) => {
+        deleteUser: async (parent, args, context, info) => {
             const user = await context.prisma.user.findUnique({
                 where: {
                     id: parseInt(args.id),
@@ -59,8 +59,7 @@ const resolvers = {
             })
             return user
         },
-        add_comment: async (parent, args, context, info) => {
-            console.log(args)
+        comment: async (parent, args, context, info) => {
             return await context.prisma.comment.create({
                 data: {
                     content: args.content,

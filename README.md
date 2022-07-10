@@ -76,16 +76,17 @@ mutation {
 }
 
 mutation {
-  delete(id: 2) {
-    id
+  deleteUser(id: 1) {
+    id,
+    username
   }
 }
 
-query {
-  users{
-    id
-    url
-    description
+mutation {
+  comment(userId: 2, content:"こんにちは") {
+    id,
+    content,
+    createdAt,
   }
 }
 ```

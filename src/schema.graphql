@@ -1,12 +1,13 @@
 type Query {
   users(filter: String): [User!]!
+  user(username: username): User!
 }
 
 type Mutation {
   addUser(username: String!, description: String): User!
   changeName(id: ID!, username: String!): User!
-  delete(id: ID!): User!
-  add_comment(userId: ID!, content: String!): Comment!
+  deleteUser(id: ID!): User!
+  comment(userId: ID!, content: String!): Comment!
 }
 
 type User {
