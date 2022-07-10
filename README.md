@@ -1,3 +1,17 @@
+# GraphQLとは
+
+[Learn GraphQL Fundamentals with Fullstack Tutorial](https://www.howtographql.com/basics/0-introduction/)
+[GraphQLの基礎 チュートリアル](https://goodeatcompany.notion.site/GraphQL-dc01d9e8ccb64b0b9a66cfd3091deee3)
+
+APIのクエリ言語。発想としては「APIをSQLっぽく書ければ便利じゃね？」
+用途はBackend for Frontend。
+
+良いところ
+・スキーマ(Schema Definition Language, SDL)による組織間コミュニケーション
+・フロントエンド側で使うフィールドを限定できる。オーバーフェッチが少ない
+・スキーマ駆動開発
+・単一エンドポイント(複数リクエストを送る必要がなくなったりする)
+
 # 環境構築(未検証)
 
 ```text
@@ -89,4 +103,9 @@ mutation {
     createdAt,
   }
 }
+```
+
+curl
+```text
+curl -X POST -H 'content-type: application/json' -d '{"query":"{users { id, username }}"}' http://localhost:4000/
 ```
