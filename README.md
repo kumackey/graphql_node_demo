@@ -90,3 +90,18 @@ mutation {
   }
 }
 ```
+
+カンペ
+```text
+  findUser(id: ID!): User!
+  findUser: async (parent, args, context) => {
+            return await context.prisma.user.findUnique({
+                where: {
+                    id: parseInt(args.id),
+                }
+            })
+        },
+        
+   kyouheikumaki@kyouheis-MacBook-Pro graphql-demo % curl -X POST -H 'content-type: application/json' -d '{"query":"{users { id, username }}"}' http://localhost:4000/
+{"data":{"users":[{"id":"2","username":"updated username"},{"id":"3","username":"kumaki"},{"id":"4","username":"kumaki"},{"id":"5","username":"詳細不明さん"},{"id":"6","username":"詳細不明さん"}]}}
+```
