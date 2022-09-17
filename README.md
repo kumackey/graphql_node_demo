@@ -20,7 +20,7 @@ npm install
 
 npx prisma migrate dev
 prisma generate
-``
+```
 
 # 開発
 
